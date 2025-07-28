@@ -1,9 +1,11 @@
+
 'use client';
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
+import Image from '@tiptap/extension-image';
 import {
   Bold,
   Italic,
@@ -20,11 +22,12 @@ import {
   Redo,
   Minus,
   RemoveFormatting,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 interface RichTextEditorProps {
   value: string;
@@ -36,6 +39,14 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
   if (!editor) {
     return null;
   }
+
+  const addImage = useCallback(() => {
+    const url = window.prompt('URL');
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }, [editor]);
 
   return (
     <div className="border border-input rounded-md p-2 flex flex-wrap items-center gap-1 sticky top-0 bg-background z-10">
@@ -124,6 +135,9 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Code className="h-4 w-4" />
       </Toggle>
+      <Button variant="ghost" size="sm" onClick={addImage}>
+        <ImageIcon className="h-4 w-4" />
+      </Button>
       <Separator orientation="vertical" className="h-6 mx-1" />
        <Button
         variant="ghost"
@@ -195,6 +209,9 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
         placeholder,
       }),
       Underline,
+      Image.configure({
+        inline: true,
+      }),
     ],
     content: value,
     editorProps: {
@@ -209,10 +226,8 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
   });
 
   useEffect(() => {
-    if (editor) {
-      const { from, to } = editor.state.selection;
-      editor.commands.setContent(value, false, { preserveWhitespace: 'full' });
-      editor.commands.setTextSelection({ from, to });
+    if (editor && editor.isReady && value !== editor.getHTML()) {
+        editor.commands.setContent(value, false, { preserveWhitespace: 'full' });
     }
   }, [value, editor]);
 
