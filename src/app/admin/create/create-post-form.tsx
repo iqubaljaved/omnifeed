@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { handleSuggestion, handleSubmit } from './actions';
 import { Loader2, Wand2 } from 'lucide-react';
@@ -112,20 +112,6 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
              <p>{titleValue ? (titleValue.length > 30 ? `${titleValue.slice(0,30)}...` : titleValue) : 'New Post'}</p>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={onSuggest}
-              disabled={isSuggesting || isContentEmpty}
-            >
-              {isSuggesting ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Wand2 className="mr-2 h-4 w-4" />
-              )}
-              Suggest Tags/Categories
-            </Button>
             <Button type="submit" size="sm" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Publish
@@ -171,7 +157,10 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
             <Separator className="my-12" />
 
             <Card>
-                <CardContent className="pt-6 space-y-6">
+                <CardHeader>
+                    <CardTitle>Metadata</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
                   <FormField
                     control={form.control}
                     name="tags"
@@ -200,6 +189,22 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
                       </FormItem>
                     )}
                   />
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={onSuggest}
+                      disabled={isSuggesting || isContentEmpty}
+                    >
+                      {isSuggesting ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <Wand2 className="mr-2 h-4 w-4" />
+                      )}
+                      Suggest Tags/Categories
+                    </Button>
+                  </div>
                 </CardContent>
             </Card>
           </div>
