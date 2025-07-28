@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -12,6 +13,8 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { CreatePostForm } from '@/app/admin/create/create-post-form';
@@ -59,6 +62,9 @@ export function Header() {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
+                 <DialogHeader>
+                    <DialogTitle className="sr-only">Create New Post</DialogTitle>
+                 </DialogHeader>
                  <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
               </DialogContent>
             </Dialog>
