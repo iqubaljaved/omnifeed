@@ -4,46 +4,19 @@ import { MountainIcon } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-muted py-8 md:py-12">
-      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="flex flex-col gap-4">
-          <Link href="/" className="flex items-center gap-2" prefetch={false}>
-            <MountainIcon className="h-6 w-6 text-primary" />
-            <span className="font-bold text-lg">TrendTide</span>
-          </Link>
-          <p className="text-muted-foreground text-sm">
-            Your daily tide of trending stories and insightful articles.
-          </p>
-          <p className="text-muted-foreground text-xs">&copy; 2024 TrendTide. All rights reserved.</p>
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Categories</h3>
-          <nav className="grid grid-cols-2 gap-2">
-            {CATEGORIES.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                className="text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
-              >
-                {category.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
-              <TwitterIcon className="h-5 w-5" />
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
-              <FacebookIcon className="h-5 w-5" />
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground" prefetch={false}>
-              <InstagramIcon className="h-5 w-5" />
-            </Link>
-          </div>
+    <footer className="bg-background border-t">
+      <div className="container mx-auto px-4 md:px-6 py-12">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-col gap-2 items-center md:items-start">
+                <Link href="/" className="flex items-center gap-2" prefetch={false}>
+                    <MountainIcon className="h-6 w-6 text-primary" />
+                    <span className="font-bold text-lg">TrendTide</span>
+                </Link>
+                <p className="text-muted-foreground text-sm">
+                    Your daily tide of trending stories and insightful articles.
+                </p>
+            </div>
+            <p className="text-muted-foreground text-xs">&copy; 2024 TrendTide. A Project by Studio. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        serif: ['var(--font-lora)', 'serif'],
         code: ['monospace'],
       },
       colors: {
@@ -101,15 +101,19 @@ export default {
               },
             },
             h1: {
+              fontFamily: theme('fontFamily.serif'),
               color: theme('colors.foreground'),
             },
             h2: {
+              fontFamily: theme('fontFamily.serif'),
               color: theme('colors.foreground'),
             },
             h3: {
+              fontFamily: theme('fontFamily.serif'),
               color: theme('colors.foreground'),
             },
             h4: {
+              fontFamily: theme('fontFamily.serif'),
               color: theme('colors.foreground'),
             },
             strong: {

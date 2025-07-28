@@ -14,37 +14,26 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
   return (
     <Link href={`/article/${article.slug}`} className="group block">
-      <Card className="overflow-hidden h-full transition-shadow duration-300 shadow-md hover:shadow-xl">
-        <div className="relative">
+      <Card className="overflow-hidden h-full shadow-none border-0 rounded-lg">
+        <div className="relative aspect-video">
           <Image
             src={article.featuredImage}
             alt={article.title}
-            width={640}
-            height={360}
-            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
             data-ai-hint="article image"
           />
-          {category && (
-             <Badge
-              variant="default"
-              className="absolute top-2 left-2 bg-accent text-accent-foreground"
-            >
-              {category.name}
-            </Badge>
-          )}
         </div>
-        <CardContent className="p-4">
-          <h3 className="text-lg font-semibold leading-snug mb-2 group-hover:text-primary transition-colors">
+        <CardContent className="p-0 pt-4">
+           {category && (
+             <p className="text-sm font-medium text-primary mb-1">{category.name}</p>
+          )}
+          <h3 className="text-xl font-bold leading-snug mb-2 group-hover:text-primary transition-colors">
             {article.title}
           </h3>
           <p className="text-sm text-muted-foreground line-clamp-2">
             {article.description}
           </p>
-          <div className="mt-4 flex items-center text-xs text-muted-foreground">
-            <span>{article.author}</span>
-            <span className="mx-2">·</span>
-            <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
-          </div>
         </CardContent>
       </Card>
     </Link>

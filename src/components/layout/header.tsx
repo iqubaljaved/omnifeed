@@ -21,8 +21,8 @@ export function Header() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
-      <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40">
+      <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-6 w-6 text-primary" />
           <span className="font-bold text-lg text-foreground">TrendTide</span>
@@ -38,20 +38,15 @@ export function Header() {
               {category.name}
             </Link>
           ))}
+           <Link
+              href={`/admin/create`}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              prefetch={false}
+            >
+              Create Post
+            </Link>
         </nav>
-        <div className="flex items-center gap-4">
-           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <DialogTrigger asChild>
-              <Button variant="default" size="sm">
-                  <PlusIcon className="w-4 h-4 mr-2" />
-                  Create Post
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-4xl h-[90vh] flex flex-col p-0">
-               <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
-            </DialogContent>
-          </Dialog>
-
+        <div className="flex items-center gap-4 md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
@@ -77,6 +72,14 @@ export function Header() {
                       {category.name}
                     </Link>
                   ))}
+                  <Link
+                      href={`/admin/create`}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                      prefetch={false}
+                    >
+                      <PlusIcon className="h-5 w-5" />
+                      Create Post
+                    </Link>
                 </nav>
               </div>
             </SheetContent>
