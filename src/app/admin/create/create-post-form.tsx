@@ -84,6 +84,8 @@ export function CreatePostForm() {
         description: 'Your new article has been published (simulated).',
       });
       form.reset();
+      // NOTE: We cannot close the dialog from here directly without complex state management.
+      // The user can close it manually. A success message is shown.
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -100,11 +102,8 @@ export function CreatePostForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create New Post</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-8">
+        <Card className="shadow-none border-0">
+          <CardContent className="space-y-8 p-0">
             <FormField
               control={form.control}
               name="title"

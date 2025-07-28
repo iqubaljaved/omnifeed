@@ -1,3 +1,5 @@
+// This page is not directly used when creating posts via the dialog,
+// but it's kept for direct access to the form if needed.
 import { CreatePostForm } from "./create-post-form";
 
 export default function CreatePostPage() {
