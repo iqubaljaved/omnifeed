@@ -24,6 +24,7 @@ import {
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
+import { useEffect } from 'react';
 
 interface RichTextEditorProps {
   value: string;
@@ -205,6 +206,12 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       onChange(editor.getHTML());
     },
   });
+
+  useEffect(() => {
+    if (editor && editor.getHTML() !== value) {
+      editor.commands.setContent(value, false);
+    }
+  }, [value, editor]);
 
   return (
     <div className="rounded-md border border-input">
