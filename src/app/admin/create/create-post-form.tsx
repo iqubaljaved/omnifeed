@@ -107,7 +107,7 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
-        <header className="flex items-center justify-between h-16 border-b bg-background px-4 md:px-6">
+        <header className="flex items-center justify-between h-16 border-b bg-background px-4 md:px-6 pr-12">
            <div className="flex items-center gap-2 text-sm text-muted-foreground">
              <p>{titleValue ? (titleValue.length > 30 ? `${titleValue.slice(0,30)}...` : titleValue) : 'New Post'}</p>
           </div>
@@ -145,7 +145,7 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
                   <FormControl>
                     <RichTextEditor
                       value={field.value}
-                      onChange={field.onChange}
+                      onChange={(value) => field.onChange(value === '<p></p>' ? '' : value)}
                       placeholder="Start writing your masterpiece..."
                     />
                   </FormControl>
