@@ -46,7 +46,9 @@ export function Header() {
               {category.name}
             </Link>
           ))}
-          {isAdmin && (
+        </nav>
+        <div className="flex items-center gap-4">
+            {isAdmin && (
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button>
@@ -54,13 +56,11 @@ export function Header() {
                   Create Post
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
+              <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-6 gap-0">
                 <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
               </DialogContent>
             </Dialog>
           )}
-        </nav>
-        <div className="flex items-center gap-4 md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
@@ -86,19 +86,6 @@ export function Header() {
                       {category.name}
                     </Link>
                   ))}
-                  {isAdmin && (
-                     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                        <DialogTrigger asChild>
-                           <Button className="w-full justify-start flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground" variant="ghost">
-                            <PlusIcon className="h-5 w-5" />
-                            Create Post
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
-                          <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
-                        </DialogContent>
-                      </Dialog>
-                  )}
                 </nav>
               </div>
             </SheetContent>

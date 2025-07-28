@@ -107,7 +107,7 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
-        <header className="flex items-center justify-between h-16 border-b bg-background px-4 md:px-6 pr-12">
+        <header className="flex items-center justify-between h-16 border-b bg-background px-4 md:px-6 -mx-6 -mt-6 mb-6">
            <div className="flex items-center gap-2 text-sm text-muted-foreground">
              <p>{titleValue ? (titleValue.length > 30 ? `${titleValue.slice(0,30)}...` : titleValue) : 'New Post'}</p>
           </div>
@@ -119,7 +119,7 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
           </div>
         </header>
         
-        <div className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12">
+        <div className="flex-1 overflow-y-auto pr-2 -mr-6">
           <div className="mx-auto max-w-3xl">
             <FormField
               control={form.control}
