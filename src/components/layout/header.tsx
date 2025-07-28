@@ -31,7 +31,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-           <Link href="/admin/create" prefetch={false}>
+           <Link href="/admin/create" prefetch={false} target="_blank" rel="noopener noreferrer">
             <Button variant="default" size="sm">
                 <PlusIcon className="w-4 h-4 mr-2" />
                 Create Post

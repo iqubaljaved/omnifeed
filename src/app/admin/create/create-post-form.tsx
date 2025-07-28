@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { handleSuggestion, handleSubmit } from './actions';
@@ -91,18 +91,23 @@ export function CreatePostForm() {
   };
 
   return (
-    <Card>
-      <CardContent className="p-6">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Create New Post</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-8">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter a catchy title" {...field} />
+                    <Input 
+                      placeholder="Article Title" 
+                      className="text-4xl font-extrabold tracking-tight border-0 shadow-none px-0 focus-visible:ring-0"
+                      {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,11 +119,10 @@ export function CreatePostForm() {
               name="content"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Content</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Write your article here..."
-                      className="min-h-[250px]"
+                      className="min-h-[50vh] border-0 shadow-none px-0 focus-visible:ring-0 text-lg"
                       {...field}
                     />
                   </FormControl>
@@ -126,11 +130,13 @@ export function CreatePostForm() {
                 </FormItem>
               )}
             />
+          </CardContent>
+        </Card>
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-medium">Organization</h3>
-                <Button
+        <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-4">
+                 <CardTitle className="text-xl">Organization</CardTitle>
+                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
@@ -144,8 +150,8 @@ export function CreatePostForm() {
                   )}
                   Suggest with AI
                 </Button>
-              </div>
-
+            </CardHeader>
+            <CardContent className="space-y-6">
               <FormField
                 control={form.control}
                 name="tags"
@@ -182,15 +188,16 @@ export function CreatePostForm() {
                   </FormItem>
                 )}
               />
-            </div>
-            
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            </CardContent>
+        </Card>
+        
+        <div className="flex justify-end">
+            <Button type="submit" size="lg" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Publish Post
             </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+        </div>
+      </form>
+    </Form>
   );
 }
