@@ -102,7 +102,7 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
     }
   };
   
-  const isContentEmpty = !contentValue || contentValue === '<p></p>';
+  const isContentEmpty = !contentValue || contentValue.replace(/<[^>]+>/g, '').trim().length === 0;
 
   return (
     <Form {...form}>
