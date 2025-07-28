@@ -13,13 +13,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { handleSuggestion, handleSubmit } from './actions';
 import { Loader2, Wand2 } from 'lucide-react';
+import { RichTextEditor } from '@/components/rich-text-editor';
 
 const formSchema = z.object({
   title: z.string().min(5, 'Title must be at least 5 characters long.'),
@@ -50,7 +50,12 @@ export function CreatePostForm() {
   const onSuggest = async () => {
     setIsSuggesting(true);
     try {
-      const result = await handleSuggestion(contentValue);
+      // We need to strip HTML from content before sending to the AI
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = contentValue;
+      const plainTextContent = tempDiv.textContent || tempDiv.innerText || "";
+      
+      const result = await handleSuggestion(plainTextContent);
       if (result) {
         form.setValue('tags', result.tags.join(', '));
         form.setValue('categories', result.categories.join(', '));
@@ -89,6 +94,8 @@ export function CreatePostForm() {
       setIsSubmitting(false);
     }
   };
+  
+  const isContentEmpty = !contentValue || contentValue === '<p></p>';
 
   return (
     <Form {...form}>
@@ -120,10 +127,10 @@ export function CreatePostForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
+                    <RichTextEditor
+                      value={field.value}
+                      onChange={field.onChange}
                       placeholder="Write your article here..."
-                      className="min-h-[50vh] border-0 shadow-none px-0 focus-visible:ring-0 text-lg"
-                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -141,7 +148,7 @@ export function CreatePostForm() {
                   variant="outline"
                   size="sm"
                   onClick={onSuggest}
-                  disabled={isSuggesting || contentValue.length < 50}
+                  disabled={isSuggesting || isContentEmpty}
                 >
                   {isSuggesting ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -73,7 +73,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-xl leading-relaxed text-muted-foreground">{article.description}</p>
             <Separator className="my-8" />
-            <p>{article.content}</p>
+            <div dangerouslySetInnerHTML={{ __html: article.content }} />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-2">
