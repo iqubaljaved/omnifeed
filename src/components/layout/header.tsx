@@ -21,10 +21,12 @@ export function Header() {
   const [dialogOpen, setDialogOpen] = useState(false);
   // In a real app, you'd get this from an auth context
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // Simulate login for demonstration purposes
+  // Simulate login for demonstration purposes and handle hydration
   useEffect(() => {
     setIsAdmin(true);
+    setIsClient(true);
   }, []);
 
 
@@ -48,7 +50,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-            {isAdmin && (
+            {isClient && isAdmin && (
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button>
@@ -56,8 +58,8 @@ export function Header() {
                   Create Post
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-6 gap-0">
-                <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
+              <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
+                 <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
               </DialogContent>
             </Dialog>
           )}
