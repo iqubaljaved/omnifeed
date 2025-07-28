@@ -9,8 +9,17 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { CreatePostForm } from '@/app/admin/create/create-post-form';
+import { useState } from 'react';
 
 export function Header() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
     <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
@@ -31,12 +40,17 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-          <Link href="/admin/create" target="_blank">
-            <Button variant="default" size="sm">
-                <PlusIcon className="w-4 h-4 mr-2" />
-                Create Post
-            </Button>
-          </Link>
+           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="default" size="sm">
+                  <PlusIcon className="w-4 h-4 mr-2" />
+                  Create Post
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl h-[90vh] flex flex-col p-0">
+               <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
+            </DialogContent>
+          </Dialog>
 
           <Sheet>
             <SheetTrigger asChild>

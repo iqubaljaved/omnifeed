@@ -29,7 +29,12 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function CreatePostForm() {
+interface CreatePostFormProps {
+  onPostCreated?: () => void;
+}
+
+
+export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
   const { toast } = useToast();
   const [isSuggesting, setIsSuggesting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,6 +88,9 @@ export function CreatePostForm() {
         description: 'Your new article has been published.',
       });
       form.reset();
+      if(onPostCreated) {
+        onPostCreated();
+      }
     } catch (error) {
       toast({
         variant: 'destructive',

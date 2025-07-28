@@ -203,15 +203,19 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       },
     },
     onUpdate({ editor }) {
-      onChange(editor.getHTML());
+      const html = editor.getHTML();
+      onChange(html === '<p></p>' ? '' : html);
     },
   });
 
   useEffect(() => {
-    if (editor && editor.getHTML() !== value) {
-      editor.commands.setContent(value, false);
+    if (editor) {
+      const { from, to } = editor.state.selection;
+      editor.commands.setContent(value, false, { preserveWhitespace: 'full' });
+      editor.commands.setTextSelection({ from, to });
     }
   }, [value, editor]);
+
 
   return (
     <div className="rounded-md border border-input">
