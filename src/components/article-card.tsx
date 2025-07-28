@@ -19,9 +19,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
           <Image
             src={article.featuredImage}
             alt={article.title}
-            width={600}
-            height={400}
-            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+            width={640}
+            height={360}
+            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint="article image"
           />
           {category && (

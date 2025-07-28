@@ -22,7 +22,7 @@ export default function Home() {
                   alt={featuredArticles[0].title}
                   width={800}
                   height={450}
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   data-ai-hint="featured article"
                   priority
                 />
