@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
+import Underline from '@tiptap/extension-underline';
 import {
   Bold,
   Italic,
@@ -13,8 +14,15 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  Underline as UnderlineIcon,
+  Quote,
+  Undo,
+  Redo,
+  Minus,
+  RemoveFormatting,
 } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
+import { Button } from './ui/button';
 
 interface RichTextEditorProps {
   value: string;
@@ -72,6 +80,13 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       </Toggle>
       <Toggle
         size="sm"
+        pressed={editor.isActive('underline')}
+        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+      >
+        <UnderlineIcon className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
         pressed={editor.isActive('strike')}
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
@@ -91,6 +106,20 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <ListOrdered className="h-4 w-4" />
       </Toggle>
+       <Toggle
+        size="sm"
+        pressed={editor.isActive('blockquote')}
+        onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
+      >
+        <Quote className="h-4 w-4" />
+      </Toggle>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+      >
+        <Minus className="h-4 w-4" />
+      </Button>
       <Toggle
         size="sm"
         pressed={editor.isActive('codeBlock')}
@@ -98,6 +127,29 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Code className="h-4 w-4" />
       </Toggle>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().undo().run()}
+        disabled={!editor.can().undo()}
+      >
+        <Undo className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().redo().run()}
+        disabled={!editor.can().redo()}
+      >
+        <Redo className="h-4 w-4" />
+      </Button>
+       <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+      >
+        <RemoveFormatting className="h-4 w-4" />
+      </Button>
     </div>
   );
 };
@@ -121,6 +173,7 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       Placeholder.configure({
         placeholder,
       }),
+      Underline,
     ],
     content: value,
     editorProps: {
