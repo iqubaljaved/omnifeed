@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -108,15 +109,16 @@ export function CreatePostForm({ onPostCreated }: CreatePostFormProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
         <header className="flex items-center justify-between h-16 border-b bg-background px-6">
-           <div className="flex items-center gap-2 text-sm text-muted-foreground">
+           <div className="flex-1 flex items-center gap-2 text-sm text-muted-foreground">
              <p>{titleValue ? (titleValue.length > 30 ? `${titleValue.slice(0,30)}...` : titleValue) : 'New Post'}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex-1 flex justify-center items-center gap-2">
             <Button type="submit" size="sm" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Publish
             </Button>
           </div>
+           <div className="flex-1" />
         </header>
         
         <div className="flex-1 overflow-y-auto p-6 pr-4">
