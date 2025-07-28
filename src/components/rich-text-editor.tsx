@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from './ui/button';
+import { Separator } from './ui/separator';
 
 interface RichTextEditorProps {
   value: string;
@@ -36,34 +37,7 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
   }
 
   return (
-    <div className="border border-input rounded-t-md p-2 flex flex-wrap items-center gap-1">
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 1 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 1 }).run()
-        }
-      >
-        <Heading1 className="h-4 w-4" />
-      </Toggle>
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 2 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 2 }).run()
-        }
-      >
-        <Heading2 className="h-4 w-4" />
-      </Toggle>
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 3 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 3 }).run()
-        }
-      >
-        <Heading3 className="h-4 w-4" />
-      </Toggle>
+    <div className="border border-input rounded-md p-2 flex flex-wrap items-center gap-1 sticky top-0 bg-background z-10">
       <Toggle
         size="sm"
         pressed={editor.isActive('bold')}
@@ -92,6 +66,35 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Strikethrough className="h-4 w-4" />
       </Toggle>
+      <Separator orientation="vertical" className="h-6 mx-1" />
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 1 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 1 }).run()
+        }
+      >
+        <Heading1 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 2 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 2 }).run()
+        }
+      >
+        <Heading2 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 3 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 3 }).run()
+        }
+      >
+        <Heading3 className="h-4 w-4" />
+      </Toggle>
+      <Separator orientation="vertical" className="h-6 mx-1" />
       <Toggle
         size="sm"
         pressed={editor.isActive('bulletList')}
@@ -113,13 +116,6 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Quote className="h-4 w-4" />
       </Toggle>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().setHorizontalRule().run()}
-      >
-        <Minus className="h-4 w-4" />
-      </Button>
       <Toggle
         size="sm"
         pressed={editor.isActive('codeBlock')}
@@ -127,6 +123,22 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Code className="h-4 w-4" />
       </Toggle>
+      <Separator orientation="vertical" className="h-6 mx-1" />
+       <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+      >
+        <Minus className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+      >
+        <RemoveFormatting className="h-4 w-4" />
+      </Button>
+      <Separator orientation="vertical" className="h-6 mx-1" />
       <Button
         variant="ghost"
         size="sm"
@@ -143,13 +155,6 @@ const EditorToolbar = ({ editor }: { editor: any }) => {
       >
         <Redo className="h-4 w-4" />
       </Button>
-       <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
-      >
-        <RemoveFormatting className="h-4 w-4" />
-      </Button>
     </div>
   );
 };
@@ -160,7 +165,7 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       StarterKit.configure({
         codeBlock: {
           HTMLAttributes: {
-            class: 'bg-muted rounded-md p-4 my-4 text-sm',
+            class: 'bg-muted rounded-md p-4 my-4 text-sm font-mono',
           },
         },
         heading: {
@@ -169,6 +174,21 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
             class: 'font-bold',
           },
         },
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-disc pl-8',
+          }
+        },
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-decimal pl-8',
+          }
+        },
+        blockquote: {
+          HTMLAttributes: {
+            class: 'border-l-4 border-primary pl-4 italic',
+          }
+        }
       }),
       Placeholder.configure({
         placeholder,
@@ -178,7 +198,7 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
     content: value,
     editorProps: {
       attributes: {
-        class: 'prose dark:prose-invert min-h-[50vh] w-full max-w-none rounded-b-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+        class: 'prose dark:prose-invert prose-sm sm:prose-base focus:outline-none w-full max-w-none',
       },
     },
     onUpdate({ editor }) {
@@ -187,9 +207,9 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
   });
 
   return (
-    <div>
+    <div className="rounded-md border border-input">
       <EditorToolbar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} className="p-4 min-h-[400px]" />
     </div>
   );
 };

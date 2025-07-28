@@ -9,17 +9,16 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { handleSuggestion, handleSubmit } from './actions';
 import { Loader2, Wand2 } from 'lucide-react';
 import { RichTextEditor } from '@/components/rich-text-editor';
+import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
   title: z.string().min(5, 'Title must be at least 5 characters long.'),
@@ -46,11 +45,11 @@ export function CreatePostForm() {
   });
 
   const contentValue = form.watch('content');
+  const titleValue = form.watch('title');
 
   const onSuggest = async () => {
     setIsSuggesting(true);
     try {
-      // We need to strip HTML from content before sending to the AI
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = contentValue;
       const plainTextContent = tempDiv.textContent || tempDiv.innerText || "";
@@ -80,17 +79,15 @@ export function CreatePostForm() {
     try {
       await handleSubmit(values);
       toast({
-        title: 'Post Created!',
-        description: 'Your new article has been published (simulated).',
+        title: 'Post Published!',
+        description: 'Your new article has been published.',
       });
       form.reset();
-      // NOTE: We cannot close the dialog from here directly without complex state management.
-      // The user can close it manually. A success message is shown.
     } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to create post.',
+        description: 'Failed to publish post.',
       });
     } finally {
       setIsSubmitting(false);
@@ -101,9 +98,35 @@ export function CreatePostForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Card className="shadow-none border-0">
-          <CardContent className="space-y-8 p-0">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
+        <header className="flex items-center justify-between h-16 border-b bg-background px-4 md:px-6">
+           <div className="flex items-center gap-2 text-sm text-muted-foreground">
+             <p>{titleValue ? (titleValue.length > 30 ? `${titleValue.slice(0,30)}...` : titleValue) : 'New Post'}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={onSuggest}
+              disabled={isSuggesting || isContentEmpty}
+            >
+              {isSuggesting ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Wand2 className="mr-2 h-4 w-4" />
+              )}
+              Suggest Tags/Categories
+            </Button>
+            <Button type="submit" size="sm" disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Publish
+            </Button>
+          </div>
+        </header>
+        
+        <div className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12">
+          <div className="mx-auto max-w-3xl">
             <FormField
               control={form.control}
               name="title"
@@ -111,8 +134,8 @@ export function CreatePostForm() {
                 <FormItem>
                   <FormControl>
                     <Input 
-                      placeholder="Article Title" 
-                      className="text-4xl font-extrabold tracking-tight border-0 shadow-none px-0 focus-visible:ring-0"
+                      placeholder="Post Title" 
+                      className="text-4xl font-extrabold tracking-tight border-0 shadow-none px-0 h-auto focus-visible:ring-0"
                       {...field} />
                   </FormControl>
                   <FormMessage />
@@ -124,84 +147,54 @@ export function CreatePostForm() {
               control={form.control}
               name="content"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mt-8">
                   <FormControl>
                     <RichTextEditor
                       value={field.value}
                       onChange={field.onChange}
-                      placeholder="Write your article here..."
+                      placeholder="Start writing your masterpiece..."
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </CardContent>
-        </Card>
 
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-4">
-                 <CardTitle className="text-xl">Organization</CardTitle>
-                 <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={onSuggest}
-                  disabled={isSuggesting || isContentEmpty}
-                >
-                  {isSuggesting ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <Wand2 className="mr-2 h-4 w-4" />
-                  )}
-                  Suggest with AI
-                </Button>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <FormField
-                control={form.control}
-                name="tags"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Tags</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g., AI, Tech, Innovation"
-                        {...field}
-                      />
-                    </FormControl>
-                    <div className="flex flex-wrap gap-1 pt-2">
-                      {field.value && field.value.split(',').map(tag => tag.trim() && <Badge key={tag} variant="secondary">{tag.trim()}</Badge>)}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <Separator className="my-12" />
 
-              <FormField
-                control={form.control}
-                name="categories"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Categories</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., Technology, Science" {...field} />
-                    </FormControl>
-                      <div className="flex flex-wrap gap-1 pt-2">
-                        {field.value && field.value.split(',').map(cat => cat.trim() && <Badge key={cat} variant="secondary">{cat.trim()}</Badge>)}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-        </Card>
-        
-        <div className="flex justify-end">
-            <Button type="submit" size="lg" disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Publish Post
-            </Button>
+            <Card>
+                <CardContent className="pt-6 space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="tags"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            placeholder="Add tags..."
+                            {...field}
+                          />
+                        </FormControl>
+                         <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="categories"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Add categories..." {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+            </Card>
+          </div>
         </div>
       </form>
     </Form>

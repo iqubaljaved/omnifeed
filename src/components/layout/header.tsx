@@ -9,14 +9,6 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { CreatePostForm } from '@/app/admin/create/create-post-form';
 
 export function Header() {
   return (
@@ -39,22 +31,12 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="default" size="sm">
-                  <PlusIcon className="w-4 h-4 mr-2" />
-                  Create Post
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-4xl h-[90vh] flex flex-col">
-              <DialogHeader>
-                <DialogTitle>Create New Post</DialogTitle>
-              </DialogHeader>
-              <div className="flex-grow overflow-auto pr-6">
-                <CreatePostForm />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Link href="/admin/create" target="_blank">
+            <Button variant="default" size="sm">
+                <PlusIcon className="w-4 h-4 mr-2" />
+                Create Post
+            </Button>
+          </Link>
 
           <Sheet>
             <SheetTrigger asChild>
