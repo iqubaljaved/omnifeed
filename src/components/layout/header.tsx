@@ -22,25 +22,22 @@ import { useState, useEffect } from 'react';
 
 export function Header() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  // In a real app, you'd get this from an auth context
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Simulate login for demonstration purposes and handle hydration
+  // Handle hydration mismatch
   useEffect(() => {
-    setIsAdmin(true);
     setIsClient(true);
   }, []);
 
 
   return (
-    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40">
-      <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
+      <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-6 w-6 text-primary" />
           <span className="font-bold text-lg text-foreground">TrendTide</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {CATEGORIES.map((category) => (
             <Link
               key={category.slug}
@@ -53,7 +50,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-            {isClient && isAdmin && (
+            {isClient && (
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button>
@@ -78,7 +75,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <div className="grid gap-4 p-4">
-                <Link href="/" className="flex items-center gap-2" prefetch={false}>
+                <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false}>
                   <MountainIcon className="h-6 w-6 text-primary" />
                   <span className="font-bold text-lg">TrendTide</span>
                 </Link>
