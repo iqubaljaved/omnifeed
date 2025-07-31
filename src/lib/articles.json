@@ -6,7 +6,7 @@
     "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your posts from this one file. To get started, simply copy the JSON object for this post, paste it as a new element in the array, and change the details. Use an online HTML editor to create your post content and paste it into the `content` field. Happy writing!</p>",
     "author": "Studio",
     "publishedAt": "2024-08-01T12:00:00Z",
-    "featuredImage": "1200x600.png",
+    "featuredImage": "/omnifeed/images/1200x600.png",
     "category": "tech",
     "tags": ["welcome", "getting-started", "demo"],
     "featured": true
