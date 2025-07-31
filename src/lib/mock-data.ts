@@ -1,5 +1,5 @@
 import type { Article, Category } from './types';
-import { Code2, UtensilsCrossed, Globe, Briefcase, Smile } from 'lucide-react';
+import { Code2, UtensilsCrossed, Globe, Briefcase, Smile, BriefcaseBusiness } from 'lucide-react';
 
 export const CATEGORIES: Category[] = [
   { name: 'Tech', slug: 'tech', icon: Code2 },
@@ -7,6 +7,7 @@ export const CATEGORIES: Category[] = [
   { name: 'World', slug: 'world', icon: Globe },
   { name: 'Business', slug: 'business', icon: Briefcase },
   { name: 'Lifestyle', slug: 'lifestyle', icon: Smile },
+  { name: 'Jobs', slug: 'jobs', icon: BriefcaseBusiness },
 ];
 
 export const ARTICLES: Article[] = [
