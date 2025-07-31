@@ -3,10 +3,10 @@
     "slug": "welcome-to-omnifeed",
     "title": "Welcome to OmniFeed: Your New Content Hub",
     "description": "This is your first post! It demonstrates how articles are structured and displayed on the site. You can edit this or delete it and start creating your own content.",
-    "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your[...]",
+    "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your posts from this one file. To get started, simply copy the JSON object for this post, paste it as a new element in the array, and change the details. Use an online HTML editor to create your post content and paste it into the `content` field. Happy writing!</p>",
     "author": "Studio",
     "publishedAt": "2024-08-01T12:00:00Z",
-    "featuredImage": "https://placehold.in/1200x600.png",
+    "featuredImage": "https://placehold.co/1200x600.png",
     "category": "tech",
     "tags": ["welcome", "getting-started", "demo"],
     "featured": true
@@ -14,13 +14,13 @@
   {
     "slug": "total-station-surveyor-job",
     "title": "Hiring: Total Station Surveyor",
-    "description": "We are looking for a skilled Total Station Surveyor with at least 3 years of experience to join our team. If you have strong technical skills in survey equipment setup, data co[...]",
-    "content": "<h1>Join Our Team as a Total Station Surveyor</h1><p>We are seeking an experienced and detail-oriented Total Station Surveyor to support our land surveying operations. This role is[...]",
+    "description": "We are looking for a skilled Total Station Surveyor with at least 3 years of experience to join our team. If you have strong technical skills in survey equipment setup, data collection, and construction layout, we encourage you to apply.",
+    "content": "<h1>Join Our Team as a Total Station Surveyor</h1><p>We are seeking an experienced and detail-oriented Total Station Surveyor to support our land surveying operations. This role is ideal for someone who is proficient with modern surveying technology and enjoys working in the field. The successful candidate will be responsible for conducting site surveys, setting out construction projects, and ensuring the accuracy of all measurements.</p><h2>Key Responsibilities:</h2><ul><li>Set up and operate Total Station and GPS equipment.</li><li>Collect and process survey data.</li><li>Perform construction stakeouts and as-built surveys.</li><li>Collaborate with engineers and construction teams.</li></ul>",
     "author": "HR Team",
-    "publishedAt": "2025-07-31T12:00:00Z",
-    "featuredImage": "/images/generated-image.png",
+    "publishedAt": "2024-07-31T12:00:00Z",
+    "featuredImage": "/omnifeed/images/generated-image.png",
     "category": "jobs",
     "tags": ["surveying", "total station", "civil engineering", "job opening", "field work"],
-    "featured": true
+    "featured": false
   }
 ]
