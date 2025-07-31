@@ -44,7 +44,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <SheetHeader>
-                <SheetTitle>
+                 <SheetTitle>
                   <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false}>
                     <MountainIcon className="h-6 w-6 text-primary" />
                     <span className="font-bold text-lg">OmniFeed</span>

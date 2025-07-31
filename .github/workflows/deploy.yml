@@ -6,7 +6,6 @@ on:
       - master
   workflow_dispatch:
 
-# Grant GITHUB_TOKEN the permissions required to make a Pages deployment.
 permissions:
   contents: read
   pages: write
@@ -22,9 +21,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action-nextjs@v1
         with:
-          # This is the same as setting `output: "export"` in your `next.config.js` file.
           static: true 
-          # The path to your Next.js project, defaults to the repository root.
           path: .
 
   deploy:
