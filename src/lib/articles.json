@@ -1,16 +1,17 @@
 [
   {
     "slug": "welcome-to-omnifeed",
-    "title": "Welcome to OmniFeed: Your New Content Hub",
-    "description": "This is your first post! It demonstrates how articles are structured and displayed on the site. You can edit this or delete it and start creating your own content.",
-    "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your posts from this one file. To get started, simply copy the JSON object for this post, paste it as a new element in the array, and change the details. Use an online HTML editor to create your post content and paste it into the `content` field. Happy writing!</p>",
-    "author": "Studio",
-    "publishedAt": "2024-08-01T12:00:00Z",
-    "featuredImage": "/omnifeed/images/1200x600.png",
+    "title": "Welcome to OmniFeed: Your Gateway to Curated Tech Insights",
+    "description": "Discover the very first step into OmniFeed—a platform dedicated to delivering the most relevant and exciting tech updates, trends, and insights.",
+    "content": "<h1>Welcome to OmniFeed!</h1><p>We are thrilled to launch OmniFeed, a brand new hub for tech enthusiasts, professionals, and curious minds alike. Our goal is to bring you thoughtfully curated news, in-depth articles, and the latest innovations from the world of technology. Dive into our content, explore diverse topics, and join our growing community. Whether you're here to learn, discover, or stay ahead—all your tech needs begin here at OmniFeed. Thank you for being part of our journey from the very start!</p>",
+    "author": "OmniFeed Team",
+    "publishedAt": "2024-08-02T10:00:00Z",
+    "featuredImage": "https://placehold.in/1200x600.png",
     "category": "tech",
-    "tags": ["welcome", "getting-started", "demo"],
-    "featured": true
-  },
+    "tags": ["welcome", "launch", "technology"],
+    "featured": false
+  }
+  ,
   {
     "slug": "total-station-surveyor-job",
     "title": "Hiring: Total Station Surveyor",
