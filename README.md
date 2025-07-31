@@ -1,4 +1,4 @@
-# Firebase Studio
+# OmniFeed by Firebase Studio
 
 This is a NextJS starter in Firebase Studio.
 
