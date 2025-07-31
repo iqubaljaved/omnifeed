@@ -6,7 +6,7 @@
     "content": "<h1>Welcome to OmniFeed!</h1><p>We are thrilled to launch OmniFeed, a brand new hub for tech enthusiasts, professionals, and curious minds alike. Our goal is to bring you thoughtfully curated news, in-depth articles, and the latest innovations from the world of technology. Dive into our content, explore diverse topics, and join our growing community. Whether you're here to learn, discover, or stay ahead—all your tech needs begin here at OmniFeed. Thank you for being part of our journey from the very start!</p>",
     "author": "OmniFeed Team",
     "publishedAt": "2024-08-02T10:00:00Z",
-    "featuredImage": "https://placehold.in/1200x600.png",
+    "featuredImage": "/omnifeed/images/cover-image.png",
     "category": "tech",
     "tags": ["welcome", "launch", "technology"],
     "featured": false
