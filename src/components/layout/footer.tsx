@@ -9,13 +9,13 @@ export function Footer() {
             <div className="flex flex-col gap-2 items-center md:items-start">
                 <Link href="/" className="flex items-center gap-2" prefetch={false}>
                     <MountainIcon className="h-6 w-6 text-primary" />
-                    <span className="font-bold text-lg">TrendTide</span>
+                    <span className="font-bold text-lg">OmniFeed</span>
                 </Link>
                 <p className="text-muted-foreground text-sm">
-                    Your daily tide of trending stories and insightful articles.
+                    Your daily feed of trending stories and insightful articles.
                 </p>
             </div>
-            <p className="text-muted-foreground text-xs">&copy; 2024 TrendTide. A Project by Studio. All rights reserved.</p>
+            <p className="text-muted-foreground text-xs">&copy; 2024 OmniFeed. A Project by Studio. All rights reserved.</p>
         </div>
       </div>
     </footer>

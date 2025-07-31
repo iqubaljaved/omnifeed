@@ -18,8 +18,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: 'TrendTide',
-  description: 'Your daily tide of trending stories and insightful articles.',
+  title: 'OmniFeed',
+  description: 'Your daily feed of trending stories and insightful articles.',
 };
 
 export default function RootLayout({

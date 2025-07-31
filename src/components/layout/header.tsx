@@ -15,7 +15,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { CreatePostForm } from '@/app/admin/create/create-post-form';
 import { useState, useEffect } from 'react';
@@ -35,7 +34,7 @@ export function Header() {
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-6 w-6 text-primary" />
-          <span className="font-bold text-lg text-foreground">TrendTide</span>
+          <span className="font-bold text-lg text-foreground">OmniFeed</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {CATEGORIES.map((category) => (
@@ -77,7 +76,7 @@ export function Header() {
               <div className="grid gap-4 p-4">
                 <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false}>
                   <MountainIcon className="h-6 w-6 text-primary" />
-                  <span className="font-bold text-lg">TrendTide</span>
+                  <span className="font-bold text-lg">OmniFeed</span>
                 </Link>
                 <nav className="grid gap-2 text-base font-medium">
                   {CATEGORIES.map((category) => (
