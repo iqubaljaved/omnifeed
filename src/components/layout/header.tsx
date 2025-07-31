@@ -4,31 +4,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { CATEGORIES } from '@/lib/mock-data';
-import { MountainIcon, MenuIcon, PlusIcon } from 'lucide-react';
+import { MountainIcon, MenuIcon } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { CreatePostForm } from '@/app/admin/create/create-post-form';
-import { useState, useEffect } from 'react';
 
 export function Header() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-
-  // Handle hydration mismatch
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
 
   return (
     <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
@@ -50,22 +33,6 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-            {isClient && (
-            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-              <DialogTrigger asChild>
-                <Button>
-                  <PlusIcon className="mr-2 h-4 w-4" />
-                  Create Post
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
-                 <DialogHeader>
-                    <DialogTitle>Create New Post</DialogTitle>
-                 </DialogHeader>
-                 <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
-              </DialogContent>
-            </Dialog>
-          )}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
