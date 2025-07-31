@@ -6,7 +6,7 @@ publishedAt: '2025-07-31'
 category: 'tech'
 tags: ['AI', 'Artificial Intelligence', 'Machine Learning', 'Future Technology', 'AI Trends']
 featured: true
-featuredImage: '/images/articles/future_of_ai.png'
+featuredImage: '1718539417913.png'
 ---
 
 ## The Future of AI: How Artificial Intelligence Is Shaping Our World
