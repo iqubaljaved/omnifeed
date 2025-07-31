@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArticleCard } from '@/components/article-card';
 import ARTICLES from '@/lib/articles.json';
+import { CATEGORIES } from '@/lib/mock-data';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Article } from '@/lib/types';
@@ -11,6 +12,7 @@ export default function Home() {
   const allArticles: Article[] = ARTICLES || [];
   const featuredArticles = allArticles.filter((article) => article.featured).slice(0, 1);
   const otherArticles = allArticles.filter((article) => !article.featured).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()).slice(0, 9);
+  const firstCategorySlug = CATEGORIES[0]?.slug || '';
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8 md:py-16">
@@ -39,11 +41,13 @@ export default function Home() {
       <section className="mb-12">
         <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-bold">Latest Posts</h2>
-             <Link href={`/`}>
+             {firstCategorySlug && (
+              <Link href={`/category/${firstCategorySlug}`}>
                 <Button variant="link" className="text-primary">
                   View All <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
+            )}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {otherArticles.map((article) => (
