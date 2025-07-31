@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { CreatePostForm } from '@/app/admin/create/create-post-form';
 import { useState, useEffect } from 'react';
@@ -59,7 +60,7 @@ export function Header() {
               </DialogTrigger>
               <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 gap-0">
                  <DialogHeader>
-                    <DialogTitle className="sr-only">Create New Post</DialogTitle>
+                    <DialogTitle>Create New Post</DialogTitle>
                  </DialogHeader>
                  <CreatePostForm onPostCreated={() => setDialogOpen(false)} />
               </DialogContent>
