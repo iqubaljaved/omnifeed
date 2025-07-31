@@ -65,3 +65,5 @@ To use your own images, you must add them to the project repository.
 -   **Step 2: Add Image to `public/images`**: The project is set up to serve static files from the `public` directory. Create a folder named `images` inside `public`. Place your image file there. The final path will be `public/images/your-image-name.jpg`.
 -   **Step 3: Set the URL in `featuredImage`**: In your `articles.json` file, set the `featuredImage` value to `/omnifeed/images/your-image-name.jpg`.
     -   **Important**: The URL **must** start with `/omnifeed/images/`. This is because the site is hosted in a subdirectory on GitHub Pages. This prefix is required for the images to load correctly on the live website.
+
+Thanks.
