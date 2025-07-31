@@ -1,7 +1,8 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArticleCard } from '@/components/article-card';
-import { ARTICLES, CATEGORIES } from '@/lib/mock-data';
+import ARTICLES from '@/lib/articles.json';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 

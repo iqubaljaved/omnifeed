@@ -1,4 +1,6 @@
-import { ARTICLES, CATEGORIES } from '@/lib/mock-data';
+
+import ARTICLES from '@/lib/articles.json';
+import { CATEGORIES } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,23 +8,27 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, User } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { ArticleCard } from '@/components/article-card';
+import { Article } from '@/lib/types';
+
 
 export async function generateStaticParams() {
-  return ARTICLES.map((article) => ({
+  const articles = ARTICLES as Article[];
+  return articles.map((article) => ({
     slug: article.slug,
   }));
 }
 
 export default function ArticlePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const article = ARTICLES.find((a) => a.slug === slug);
+  const articles = ARTICLES as Article[];
+  const article = articles.find((a) => a.slug === slug);
 
   if (!article) {
     notFound();
   }
 
   const category = CATEGORIES.find((c) => c.slug === article.category);
-  const relatedArticles = ARTICLES.filter(
+  const relatedArticles = articles.filter(
     (a) => a.category === article.category && a.slug !== article.slug
   ).slice(0, 3);
 
