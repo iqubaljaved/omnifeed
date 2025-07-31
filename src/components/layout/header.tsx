@@ -8,6 +8,8 @@ import { MountainIcon, MenuIcon } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -41,11 +43,15 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <div className="grid gap-4 p-4">
-                <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false}>
-                  <MountainIcon className="h-6 w-6 text-primary" />
-                  <span className="font-bold text-lg">OmniFeed</span>
-                </Link>
+              <SheetHeader>
+                <SheetTitle>
+                  <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false}>
+                    <MountainIcon className="h-6 w-6 text-primary" />
+                    <span className="font-bold text-lg">OmniFeed</span>
+                  </Link>
+                </SheetTitle>
+              </SheetHeader>
+              <div className="grid gap-4 py-4">
                 <nav className="grid gap-2 text-base font-medium">
                   {CATEGORIES.map((category) => (
                     <Link
