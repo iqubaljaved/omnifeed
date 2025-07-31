@@ -4,6 +4,7 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
+  basePath: '/omnifeed1',
   assetPrefix: '/omnifeed1/',
   images: {
     unoptimized: true,
