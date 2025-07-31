@@ -6,7 +6,7 @@
     "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your[...]",
     "author": "Studio",
     "publishedAt": "2024-08-01T12:00:00Z",
-    "featuredImage": "https://placehold.co/1200x600.png",
+    "featuredImage": "https://placehold.in/1200x600.png",
     "category": "tech",
     "tags": ["welcome", "getting-started", "demo"],
     "featured": true
