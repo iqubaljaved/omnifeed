@@ -1,46 +1,42 @@
-
+#!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-const articlesDirectory = path.join(process.cwd(), 'src/content/articles');
-const outputFilePath = path.join(process.cwd(), 'src/lib/articles.json');
-const imageBasePath = '/images/articles/';
-const assetPrefix = '/omnifeed1';
+const articlesDir = path.join(process.cwd(), 'src', 'content', 'articles');
+const articlesJsonPath = path.join(process.cwd(), 'src', 'lib', 'articles.json');
 
 function getArticlesData() {
-  const fileNames = fs.readdirSync(articlesDirectory);
-  const articlesData = fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
+  const fileNames = fs.readdirSync(articlesDir);
+  const articles = fileNames
+    .filter(fileName => fileName.endsWith('.md'))
+    .map(fileName => {
       const slug = fileName.replace(/\.md$/, '');
-      const fullPath = path.join(articlesDirectory, fileName);
+      const fullPath = path.join(articlesDir, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
-
-      const featuredImage = data.featuredImage 
-        ? `${assetPrefix}${imageBasePath}${data.featuredImage}`
-        : `${assetPrefix}${imageBasePath}default.png`;
+      const matterResult = matter(fileContents);
 
       return {
         slug,
-        ...data,
-        featuredImage,
-        content,
+        ...matterResult.data,
+        featuredImage: matterResult.data.featuredImage
+          ? `/omnifeed1/images/articles/${matterResult.data.featuredImage}`
+          : undefined,
+        content: matterResult.content,
       };
     });
-  return articlesData;
+  return articles;
 }
 
 async function buildContent() {
+  console.log('Starting content build...');
   try {
-    console.log('Starting content build...');
-    const articlesData = getArticlesData();
+    const articles = getArticlesData();
 
     const articlesWithHtml = await Promise.all(
-      articlesData.map(async (article) => {
+      articles.map(async article => {
         const processedContent = await remark()
           .use(html)
           .process(article.content);
@@ -52,11 +48,10 @@ async function buildContent() {
       })
     );
     
-    fs.writeFileSync(outputFilePath, JSON.stringify(articlesWithHtml, null, 2));
-    console.log(`Successfully built ${articlesWithHtml.length} articles to ${outputFilePath}`);
+    fs.writeFileSync(articlesJsonPath, JSON.stringify(articlesWithHtml, null, 2));
+    console.log(`Successfully built ${articlesWithHtml.length} articles to ${articlesJsonPath}`);
   } catch (error) {
     console.error('Error building content:', error);
-    process.exit(1);
   }
 }
 
