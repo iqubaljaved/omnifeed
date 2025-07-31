@@ -9,8 +9,7 @@
     "build": "node ./scripts/build-content.mjs && next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "deploy": "npm run build && touch out/.nojekyll"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.14.1",
