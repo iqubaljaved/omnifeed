@@ -5,8 +5,8 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  assetPrefix: isProd ? '/omnifeed1/' : '',
-  basePath: isProd ? '/omnifeed1' : '',
+  assetPrefix: isProd ? '/omnifeed1/' : undefined,
+  basePath: isProd ? '/omnifeed1' : undefined,
   images: {
     unoptimized: true,
   },
