@@ -9,7 +9,6 @@ import { Separator } from '@/components/ui/separator';
 import { ArticleCard } from '@/components/article-card';
 import { Article } from '@/lib/types';
 
-// ADD THIS FUNCTION AT THE TOP LEVEL
 export async function generateStaticParams() {
   const articles = ARTICLES as Article[];
   if (!Array.isArray(articles)) {
