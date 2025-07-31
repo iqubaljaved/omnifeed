@@ -6,6 +6,9 @@ import { notFound } from 'next/navigation';
 import { Article } from '@/lib/types';
 
 export async function generateStaticParams() {
+  if (!Array.isArray(CATEGORIES)) {
+    return [];
+  }
   return CATEGORIES.map((category) => ({
     slug: category.slug,
   }));

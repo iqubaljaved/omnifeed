@@ -13,6 +13,9 @@ import { Article } from '@/lib/types';
 
 export async function generateStaticParams() {
   const articles = ARTICLES as Article[];
+  if (!Array.isArray(articles)) {
+    return [];
+  }
   return articles.map((article) => ({
     slug: article.slug,
   }));
