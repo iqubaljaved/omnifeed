@@ -7,55 +7,56 @@ import html from 'remark-html';
 
 const articlesDirectory = path.join(process.cwd(), 'src/content/articles');
 const outputFilePath = path.join(process.cwd(), 'src/lib/articles.json');
+const imageBasePath = '/images/articles/';
+const assetPrefix = '/omnifeed1';
 
 function getArticlesData() {
   const fileNames = fs.readdirSync(articlesDirectory);
-  const articles = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map(fileName => {
+  const articlesData = fileNames
+    .filter((fileName) => fileName.endsWith('.md'))
+    .map((fileName) => {
       const slug = fileName.replace(/\.md$/, '');
       const fullPath = path.join(articlesDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data, content } = matter(fileContents);
 
-      const matterResult = matter(fileContents);
+      const featuredImage = data.featuredImage 
+        ? `${assetPrefix}${imageBasePath}${data.featuredImage}`
+        : `${assetPrefix}${imageBasePath}default.png`;
 
       return {
         slug,
-        ...matterResult.data,
-        featuredImage: matterResult.data.featuredImage ? `/images/articles/${matterResult.data.featuredImage}` : '',
-        content: matterResult.content,
+        ...data,
+        featuredImage,
+        content,
       };
     });
-
-  return Promise.all(articles.map(async (article) => {
-    const processedContent = await remark()
-      .use(html)
-      .process(article.content);
-    const contentHtml = processedContent.toString();
-
-    // The 'content' property for the final JSON is the HTML,
-    // we remove the original markdown content.
-    const { content, ...rest } = article;
-
-    return {
-      ...rest,
-      content: contentHtml,
-    };
-  }));
+  return articlesData;
 }
 
 async function buildContent() {
-  console.log('Starting content build...');
   try {
-    const articles = await getArticlesData();
-    // Sort articles by date in descending order
-    articles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+    console.log('Starting content build...');
+    const articlesData = getArticlesData();
 
-    fs.writeFileSync(outputFilePath, JSON.stringify(articles, null, 2));
-    console.log(`Successfully built ${articles.length} articles to ${outputFilePath}`);
+    const articlesWithHtml = await Promise.all(
+      articlesData.map(async (article) => {
+        const processedContent = await remark()
+          .use(html)
+          .process(article.content);
+        const contentHtml = processedContent.toString();
+        return {
+          ...article,
+          content: contentHtml,
+        };
+      })
+    );
+    
+    fs.writeFileSync(outputFilePath, JSON.stringify(articlesWithHtml, null, 2));
+    console.log(`Successfully built ${articlesWithHtml.length} articles to ${outputFilePath}`);
   } catch (error) {
     console.error('Error building content:', error);
-    process.exit(1); // Exit with an error code
+    process.exit(1);
   }
 }
 
