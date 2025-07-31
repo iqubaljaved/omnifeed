@@ -3,21 +3,19 @@
     "slug": "welcome-to-omnifeed",
     "title": "Welcome to OmniFeed: Your New Content Hub",
     "description": "This is your first post! It demonstrates how articles are structured and displayed on the site. You can edit this or delete it and start creating your own content.",
-    "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your posts by editing the <code>src/lib/articles.json</code> file.</p><h2>Key Features</h2><p>Here’s a quick rundown of what we’ve built:</p><ul><li><strong>Static Site Generation:</strong> Your site is built with Next.js and exported to static HTML, making it incredibly fast and SEO-friendly.</li><li><strong>Dynamic Pages:</strong> Article and category pages are generated automatically at build time.</li><li><strong>Clean Design:</strong> A modern, responsive design using Tailwind CSS and ShadCN UI components.</li></ul><p>We are excited to see what you create!</p>",
+    "content": "<h1>Welcome to the Future of Content</h1><p>This is a sample post created for you by Studio. The platform is now fully configured and ready for your content. You can manage all your[...]",
     "author": "Studio",
     "publishedAt": "2024-08-01T12:00:00Z",
     "featuredImage": "https://placehold.co/1200x600.png",
     "category": "tech",
     "tags": ["welcome", "getting-started", "demo"],
     "featured": true
-  }
-],
-[
+  },
   {
     "slug": "total-station-surveyor-job",
     "title": "Hiring: Total Station Surveyor",
-    "description": "We are looking for a skilled Total Station Surveyor with at least 3 years of experience to join our team. If you have strong technical skills in survey equipment setup, data collection, and quality control, we want to hear from you.",
-    "content": "<h1>Join Our Team as a Total Station Surveyor</h1><p>We are seeking an experienced and detail-oriented Total Station Surveyor to support our land surveying operations. This role is essential in ensuring precise field measurements and accurate data handling for construction and mapping projects.</p><h2>Job Responsibilities</h2><h3>1. Setting Up the Equipment</h3><ul><li><strong>Positioning:</strong> Set up the Total Station accurately at known points, ensuring level and calibration.</li><li><strong>Orientation:</strong> Properly orient the instrument using known reference points.</li><li><strong>Calibration Checks:</strong> Regularly verify the instrument’s calibration to maintain measurement accuracy.</li></ul><h3>2. Data Collection</h3><ul><li><strong>Measurements:</strong> Record horizontal/vertical angles and distances to survey points.</li><li><strong>Control Points:</strong> Identify and measure control benchmarks and key reference points.</li><li><strong>Field Notes:</strong> Maintain detailed notes, including conditions, instrument settings, and issues encountered.</li></ul><h3>3. Data Management</h3><ul><li><strong>Recording:</strong> Log data into the Total Station system and ensure backups are created.</li><li><strong>Error Checking:</strong> Monitor readings for discrepancies, anomalies, or poor conditions.</li><li><strong>Data Transfer:</strong> Download collected data for analysis and mapping.</li></ul><h3>4. Analysis and Quality Control</h3><ul><li><strong>Processing:</strong> Use software tools to process survey data into maps, 3D models, or plans.</li><li><strong>Accuracy Verification:</strong> Ensure final data meets required standards and re-check if needed.</li></ul><h2>Job Details</h2><ul><li><strong>Pay:</strong> ₹25,000.00 - ₹35,000.00 per month</li><li><strong>Schedule:</strong> Day shift / Morning shift</li><li><strong>Supplemental Pay:</strong> Performance bonus</li><li><strong>Experience:</strong> Minimum 3 years (preferred)</li><li><strong>Work Location:</strong> In person</li></ul><p>If you're passionate about precision and ready to contribute to impactful surveying projects, apply now!</p>",
+    "description": "We are looking for a skilled Total Station Surveyor with at least 3 years of experience to join our team. If you have strong technical skills in survey equipment setup, data co[...]",
+    "content": "<h1>Join Our Team as a Total Station Surveyor</h1><p>We are seeking an experienced and detail-oriented Total Station Surveyor to support our land surveying operations. This role is[...]",
     "author": "HR Team",
     "publishedAt": "2025-07-31T12:00:00Z",
     "featuredImage": "public/images/generated-image.png",
@@ -26,4 +24,3 @@
     "featured": true
   }
 ]
-
