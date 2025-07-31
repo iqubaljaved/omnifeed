@@ -1,15 +1,15 @@
 [
   {
     "slug": "welcome-to-omnifeed",
-    "title": "Welcome to OmniFeed: Your Gateway to Curated Tech Insights",
+    "title": "Welcome to OmniFeed!",
     "description": "Discover the very first step into OmniFeed—a platform dedicated to delivering the most relevant and exciting tech updates, trends, and insights.",
-    "content": "<h1>Welcome to OmniFeed!</h1><p>We are thrilled to launch OmniFeed, a brand new hub for tech enthusiasts, professionals, and curious minds alike. Our goal is to bring you thoughtfully curated news, in-depth articles, and the latest innovations from the world of technology. Dive into our content, explore diverse topics, and join our growing community. Whether you're here to learn, discover, or stay ahead—all your tech needs begin here at OmniFeed. Thank you for being part of our journey from the very start!</p>",
+    "content": "<p>We’re thrilled to have you here. OmniFeed is your destination for engaging stories and updates on technology, food, world news, travel, business, and jobs. Whether you’re stopping by to read the latest trends or to satisfy your curiosity, there’s something for everyone. Explore, connect, and be inspired—thank you for choosing to be part of the OmniFeed community!</p>",
     "author": "OmniFeed Team",
     "publishedAt": "2024-08-02T10:00:00Z",
     "featuredImage": "/omnifeed/images/cover-image.png",
     "category": "tech",
     "tags": ["welcome", "launch", "technology"],
-    "featured": false
+    "featured": true
   },
   {
     "slug": "total-station-surveyor-job",
