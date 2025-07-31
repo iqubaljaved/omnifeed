@@ -2,11 +2,12 @@
 import type {NextConfig} from 'next';
 
 const isProd = process.env.NODE_ENV === 'production';
+const repositoryName = 'omnifeed1';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  assetPrefix: isProd ? '/omnifeed1/' : '',
-  basePath: isProd ? '/omnifeed1' : '',
+  assetPrefix: isProd ? `/${repositoryName}/` : '',
+  basePath: isProd ? `/${repositoryName}` : '',
   images: {
     unoptimized: true,
   },
