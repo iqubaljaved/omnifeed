@@ -5,10 +5,12 @@ import { ArticleCard } from '@/components/article-card';
 import ARTICLES from '@/lib/articles.json';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { Article } from '@/lib/types';
 
 export default function Home() {
-  const featuredArticles = ARTICLES.filter((article) => article.featured).slice(0, 1);
-  const otherArticles = ARTICLES.filter((article) => !article.featured).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()).slice(0, 9);
+  const allArticles: Article[] = ARTICLES || [];
+  const featuredArticles = allArticles.filter((article) => article.featured).slice(0, 1);
+  const otherArticles = allArticles.filter((article) => !article.featured).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()).slice(0, 9);
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8 md:py-16">
