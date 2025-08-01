@@ -9,12 +9,19 @@ import Image from 'next/image';
 import { Article } from '@/lib/types';
 
 export default function Home() {
-  const allArticles: Article[] = (ARTICLES as Article[]).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()) || [];
+  const allArticles: Article[] = ARTICLES as Article[];
 
-  const featuredArticle = allArticles.find((article) => article.featured);
+  // The "Welcome to OmniFeed" post is always featured on the homepage.
+  const featuredArticle = allArticles.find(
+    (article) => article.slug === 'welcome-to-omnifeed'
+  );
 
-  const otherArticles = allArticles.filter((article) => article.slug !== featuredArticle?.slug).slice(0, 9);
-  
+  // Other articles are sorted from newest to oldest.
+  const otherArticles = allArticles
+    .filter((article) => article.slug !== featuredArticle?.slug)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, 9);
+
   const firstCategorySlug = CATEGORIES[0]?.slug || '';
 
   return (

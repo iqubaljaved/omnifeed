@@ -1,3 +1,4 @@
+
 [
   {
     "slug": "welcome-to-omnifeed",
@@ -9,7 +10,7 @@
     "featuredImage": "/omnifeed/images/omnifeed_cover.png",
     "category": "tech",
     "tags": ["welcome", "launch", "technology"],
-    "featured": true
+    "featured": false
   },
   {
     "slug": "total-station-surveyor-job",
@@ -153,6 +154,6 @@
       "featuredImage": "https://placehold.in/1200x600.png",
       "category": "tech",
       "tags": ["airtel", "jio", "5g", "comparison", "network", "plans", "india"],
-      "featured": true
+      "featured": false
   }
 ]
