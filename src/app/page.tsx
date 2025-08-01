@@ -1,33 +1,28 @@
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { ArticleCard } from '@/components/article-card';
 import ARTICLES from '@/lib/articles.json';
-import { CATEGORIES } from '@/lib/mock-data';
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import { Article } from '@/lib/types';
-import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
   const allArticles: Article[] = ARTICLES as Article[];
 
-  // Find the welcome article
+  // 1. Find and isolate the welcome article
   const welcomeArticle = allArticles.find(a => a.slug === 'welcome-to-omnifeed');
 
-  // Filter out the welcome article and sort the rest by date
+  // 2. Get all other articles and sort them from newest to oldest
   const otherSortedArticles = allArticles
     .filter(a => a.slug !== 'welcome-to-omnifeed')
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-  const mainArticle = welcomeArticle; // The welcome article is always the main one
-  const topArticles = otherSortedArticles.slice(0, 4);
-  const latestArticles = otherSortedArticles.slice(4, 10);
+  // 3. Assign articles to the different sections on the homepage
+  const mainArticle = welcomeArticle; // This is now guaranteed to be the welcome article
+  const topArticles = otherSortedArticles.slice(0, 4); // The next 4 latest articles
+  const latestArticles = otherSortedArticles.slice(4, 10); // The subsequent 6 latest articles
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* Main Article */}
+            {/* Main Article (Pinned Welcome Post) */}
             {mainArticle && (
                 <div className="lg:col-span-2">
                     <ArticleCard article={mainArticle} isMain />
