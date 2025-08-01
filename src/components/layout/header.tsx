@@ -13,8 +13,22 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Input } from '@/components/ui/input';
+import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function Header() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  }
 
   return (
     <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
@@ -36,14 +50,16 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-           <div className="hidden md:flex items-center gap-2 relative">
+           <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2 relative">
              <SearchIcon className="absolute left-3 w-4 h-4 text-muted-foreground" />
              <Input 
                 type="search" 
                 placeholder="Search articles..."
                 className="pl-10 w-48 lg:w-64"
+                value={searchQuery}
+                onChange={handleSearchInputChange}
               />
-           </div>
+           </form>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
@@ -61,10 +77,16 @@ export function Header() {
                 </SheetTitle>
               </SheetHeader>
               <div className="grid gap-4 py-4">
-                <div className="px-3 relative">
+                <form onSubmit={handleSearch} className="px-3 relative">
                   <SearchIcon className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input type="search" placeholder="Search..." className="pl-10"/>
-                </div>
+                  <Input 
+                    type="search" 
+                    placeholder="Search..." 
+                    className="pl-10"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                  />
+                </form>
                 <nav className="grid gap-2 text-base font-medium">
                   {CATEGORIES.map((category) => (
                     <Link
