@@ -1,3 +1,4 @@
+
 import ARTICLES from '@/lib/articles.json';
 import { CATEGORIES } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
@@ -5,9 +6,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 import { ArticleCard } from '@/components/article-card';
-import { Article } from '@/lib/types';
+import { Article, Heading } from '@/lib/types';
+import { JSDOM } from 'jsdom';
+import { TableOfContents } from '@/components/table-of-contents';
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
+}
 
 export async function generateStaticParams() {
   const articles = ARTICLES as Article[];
@@ -32,6 +41,18 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const relatedArticles = articles
     .filter((a) => a.category === article.category && a.slug !== article.slug)
     .slice(0, 3);
+
+  // Parse content to add IDs to headings and extract them for TOC
+  const dom = new JSDOM(article.content);
+  const headings: Heading[] = [];
+  dom.window.document.querySelectorAll('h1, h2, h3').forEach((heading) => {
+    const level = parseInt(heading.tagName.substring(1));
+    const text = heading.textContent || '';
+    const id = slugify(text);
+    heading.id = id;
+    headings.push({ id, text, level });
+  });
+  const contentWithIds = dom.window.document.body.innerHTML;
 
   return (
     <article>
@@ -78,8 +99,14 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             />
           </div>
 
+          {headings.length > 0 && (
+            <div className="mb-12">
+              <TableOfContents headings={headings} />
+            </div>
+           )}
+
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+            <div dangerouslySetInnerHTML={{ __html: contentWithIds }} />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-2">

@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 
 export interface Category {
@@ -17,4 +18,10 @@ export interface Article {
   category: Category['slug'];
   tags: string[];
   featured?: boolean;
+}
+
+export interface Heading {
+  id: string;
+  text: string;
+  level: number;
 }
