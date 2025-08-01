@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, User } from 'lucide-react';
+import { Calendar, ChevronRight, Home, User } from 'lucide-react';
 import { ArticleCard } from '@/components/article-card';
 import { Article, Heading } from '@/lib/types';
 import { JSDOM } from 'jsdom';
@@ -62,22 +62,19 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="container mx-auto px-4 md:px-6 my-12">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+            <Link href="/" className="hover:text-primary flex items-center gap-1"><Home className="w-4 h-4" /> Home</Link>
+            <ChevronRight className="w-4 h-4" />
+            {category && <Link href={`/category/${category.slug}`} className="hover:text-primary">{category.name}</Link>}
+        </div>
         <div className="grid lg:grid-cols-3 gap-12">
-
           {/* Main Content */}
           <article className="lg:col-span-2">
             <header className="mb-8">
-              {category && (
-                <Link href={`/category/${category.slug}`} className="mb-4">
-                  <p className="text-base font-semibold text-primary">
-                    {category.name}
-                  </p>
-                </Link>
-              )}
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight my-4">
                 {article.title}
               </h1>
-              <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-4 text-sm text-muted-foreground border-y py-3">
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" />
                   <span>{article.author}</span>
@@ -101,7 +98,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 alt={article.title}
                 layout="fill"
                 objectFit="cover"
-                className="rounded-lg"
+                className="rounded-none"
                 data-ai-hint="article hero"
                 priority
               />
@@ -120,7 +117,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             <div className="mt-8 flex flex-wrap gap-2">
               {article.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
-                  {tag}
+                  #{tag}
                 </Badge>
               ))}
             </div>

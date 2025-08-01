@@ -4,19 +4,12 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
-import { Inter, Merriweather } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-});
-
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-merriweather',
-  weight: ['400', '700', '900']
 });
 
 export const metadata: Metadata = {
@@ -30,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${merriweather.variable}`}>
+    <html lang="en" className={`${inter.variable}`}>
       <head>
       </head>
       <body className="antialiased flex flex-col min-h-screen">

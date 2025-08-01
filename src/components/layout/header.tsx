@@ -31,7 +31,7 @@ export function Header() {
   }
 
   return (
-    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
+    <header className="bg-background sticky top-0 z-40 border-b">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-6 w-6 text-primary" />
@@ -55,7 +55,7 @@ export function Header() {
              <Input 
                 type="search" 
                 placeholder="Search articles..."
-                className="pl-10 w-48 lg:w-64"
+                className="pl-10 w-48 lg:w-64 !rounded-full"
                 value={searchQuery}
                 onChange={handleSearchInputChange}
               />

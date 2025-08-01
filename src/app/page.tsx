@@ -7,60 +7,42 @@ import { CATEGORIES } from '@/lib/mock-data';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Article } from '@/lib/types';
+import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
   const allArticles: Article[] = ARTICLES as Article[];
 
-  // The "Welcome to OmniFeed" post is always featured on the homepage.
-  const featuredArticle = allArticles.find(
-    (article) => article.slug === 'welcome-to-omnifeed'
-  );
+  const sortedArticles = allArticles
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-  // Other articles are sorted from newest to oldest.
-  const otherArticles = allArticles
-    .filter((article) => article.slug !== featuredArticle?.slug)
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, 9);
-
-  const firstCategorySlug = CATEGORIES[0]?.slug || '';
+  const mainArticle = sortedArticles[0];
+  const otherArticles = sortedArticles.slice(1, 5);
+  const latestArticles = sortedArticles.slice(5, 11);
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-8 md:py-16">
-      
-      {featuredArticle && (
-        <section className="mb-16 text-center">
-            <Link href={`/article/${featuredArticle.slug}`} className="group block">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">{featuredArticle.title}</h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-                {featuredArticle.description}
-              </p>
-              <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 max-w-5xl mx-auto aspect-video">
-                <Image
-                  src={featuredArticle.featuredImage}
-                  alt={featuredArticle.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  data-ai-hint="featured article"
-                  priority
-                />
-              </div>
-            </Link>
+    <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Main Article */}
+            {mainArticle && (
+                <div className="lg:col-span-2">
+                    <ArticleCard article={mainArticle} isMain />
+                </div>
+            )}
+
+            {/* Other Top Articles */}
+            <div className="space-y-8">
+                {otherArticles.map(article => (
+                     <ArticleCard key={article.slug} article={article} isHorizontal />
+                ))}
+            </div>
         </section>
-      )}
 
       <section className="mb-12">
-        <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold">Latest Posts</h2>
-             {firstCategorySlug && (
-              <Link href={`/category/${firstCategorySlug}`}>
-                <Button variant="link" className="text-primary">
-                  View All <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            )}
+        <div className="flex justify-between items-center mb-8 border-b pb-2">
+            <h2 className="text-2xl font-bold text-primary">Latest Posts</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {otherArticles.map((article) => (
+          {latestArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
