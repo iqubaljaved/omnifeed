@@ -1,9 +1,10 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
-import { Inter, Lora } from 'next/font/google';
+import { Inter, Merriweather } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -11,10 +12,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const lora = Lora({
+const merriweather = Merriweather({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-lora',
+  variable: '--font-merriweather',
+  weight: ['400', '700', '900']
 });
 
 export const metadata: Metadata = {
@@ -28,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+    <html lang="en" className={`${inter.variable} ${merriweather.variable}`}>
       <head>
       </head>
       <body className="antialiased flex flex-col min-h-screen">
