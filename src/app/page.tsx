@@ -12,12 +12,17 @@ import { Badge } from '@/components/ui/badge';
 export default function Home() {
   const allArticles: Article[] = ARTICLES as Article[];
 
-  const sortedArticles = allArticles
+  // Find the welcome article
+  const welcomeArticle = allArticles.find(a => a.slug === 'welcome-to-omnifeed');
+
+  // Filter out the welcome article and sort the rest by date
+  const otherSortedArticles = allArticles
+    .filter(a => a.slug !== 'welcome-to-omnifeed')
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-  const mainArticle = sortedArticles[0];
-  const otherArticles = sortedArticles.slice(1, 5);
-  const latestArticles = sortedArticles.slice(5, 11);
+  const mainArticle = welcomeArticle; // The welcome article is always the main one
+  const topArticles = otherSortedArticles.slice(0, 4);
+  const latestArticles = otherSortedArticles.slice(4, 10);
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
@@ -31,7 +36,7 @@ export default function Home() {
 
             {/* Other Top Articles */}
             <div className="space-y-8">
-                {otherArticles.map(article => (
+                {topArticles.map(article => (
                      <ArticleCard key={article.slug} article={article} isHorizontal />
                 ))}
             </div>
